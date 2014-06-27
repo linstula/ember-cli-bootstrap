@@ -1,7 +1,8 @@
 {
   "name": "ember-cli-bootstrap",
-  "version": "0.0.0",
   "description": "Include bootstrap into an ember-cli app",
+  "version": "0.0.1",
+  "author": "Lin Reid",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,6 +13,9 @@
     "ember",
     "ember-cli"
   ],
-  "author": "Lin Reid",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dockyard/ember-cli-bootstrap.git"
+  },
   "license": "MIT"
 }
