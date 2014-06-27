@@ -1,0 +1,6 @@
+{
+  "name": "ember-cli-bootstrap",
+  "dependencies": {
+    "bootstrap": "~3.1.1"
+  }
+}
