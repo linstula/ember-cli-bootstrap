@@ -24,10 +24,30 @@ EmberCLIBootstrap.prototype.treeFor = function treeFor(name) {
 };
 
 EmberCLIBootstrap.prototype.included = function included(app) {
-  var rootPath = 'vendor/bootstrap/dist/css/';
+  var env = app.env;
+  var stylePath = 'vendor/bootstrap/dist/css/';
+  var javascriptsPath = 'vendor/ember-addons.bs_for_ember/dist/js/';
 
-  app.import(rootPath + 'bootstrap-theme.css');
-  app.import(rootPath + 'bootstrap.css');
+  // Import css from bootstrap
+  app.import(stylePath + 'bootstrap-theme.css');
+  app.import(stylePath + 'bootstrap.css');
+
+  // set modifier for unminified or minified js files.
+  var envModifier = env !== 'production' ? '.max' : '.min';
+
+  var fullJavascriptsPath = path.join('node_modules/ember-cli-bootstrap', javascriptsPath);
+  var jsFiles = fs.readdirSync(fullJavascriptsPath);
+
+  // Import bootstrap_for_ember bs-core before other components
+  app.import(javascriptsPath + 'bs-core' + envModifier + '.js');
+
+  // Import remaining bootstrap_for_ember components
+  jsFiles.forEach(function(file) {
+    var fileName = file.split('.')[0];
+    if (fileName !== 'bs-core') {
+      app.import(javascriptsPath + fileName + envModifier + '.js');
+    }
+  })
 };
 
 module.exports = EmberCLIBootstrap;
