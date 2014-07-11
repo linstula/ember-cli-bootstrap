@@ -1,7 +1,7 @@
 {
   "name": "ember-cli-bootstrap",
   "description": "Include bootstrap into an ember-cli app",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Lin Reid",
   "main": "index.js",
   "scripts": {
