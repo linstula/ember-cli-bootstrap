@@ -5,7 +5,7 @@ ember-cli-bootstrap
 
 This is an ember-cli addon that includes [twitter bootstrap]('http://getbootstrap.com/') into your ember-cli project.
 
-This addon utilizes the [bootstrap_for_ember]('https://github.com/ember-addons/bootstrap-for-ember') library, which provides a collection of Ember componenets based on Twitter Bootstrap V3.
+This addon utilizes the [bootstrap_for_ember]('https://github.com/ember-addons/bootstrap-for-ember') library, which provides a collection of Ember components based on Twitter Bootstrap V3.
 You can find documentation for usage [here]('https://github.com/ember-addons/bootstrap-for-ember').
 
 #Usage
