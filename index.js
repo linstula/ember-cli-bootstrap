@@ -42,6 +42,9 @@ EmberCLIBootstrap.prototype.included = function included(app) {
   app.import(rootPath + 'css/bootstrap-theme.css');
   app.import(rootPath + 'css/bootstrap.css');
 
+  // Import js from bootstrap
+  app.import(rootPath + 'js/bootstrap.js');
+
   // Import bootstrap_for_ember bs-core before other components
   app.import(javascriptsPath + 'bs-core' + envModifier + '.js');
 
