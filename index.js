@@ -1,9 +1,9 @@
 'use strict';
 
-var path       = require('path');
-var fs         = require('fs');
-var mergeTrees = require('broccoli-merge-trees');
-var pickFiles  = require('broccoli-static-compiler');
+var path       = require('path'),
+    fs         = require('fs'),
+    mergeTrees = require('broccoli-merge-trees'),
+    pickFiles  = require('broccoli-static-compiler');
 
 function EmberCLIBootstrap(project) {
   this.project = project;
