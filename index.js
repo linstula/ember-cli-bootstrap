@@ -24,19 +24,24 @@ EmberCLIBootstrap.prototype.treeFor = function treeFor(name) {
 };
 
 EmberCLIBootstrap.prototype.included = function included(app) {
-  var env = app.env;
-  var stylePath = 'vendor/bootstrap/dist/css/';
-  var javascriptsPath = 'vendor/ember-addons.bs_for_ember/dist/js/';
+  
+  var rootPath            = 'vendor/bootstrap/dist/',
+      javascriptsPath     = 'vendor/ember-addons.bs_for_ember/dist/js/',
+      env                 = app.env,
+      envModifier         = env !== 'production' ? '.max' : '.min', // set modifier for unminified or minified js files.
+      fullJavascriptsPath = path.join('node_modules/ember-cli-bootstrap', javascriptsPath),
+      jsFiles             = fs.readdirSync(fullJavascriptsPath);
 
+  
   // Import css from bootstrap
-  app.import(stylePath + 'bootstrap-theme.css');
-  app.import(stylePath + 'bootstrap.css');
-
-  // set modifier for unminified or minified js files.
-  var envModifier = env !== 'production' ? '.max' : '.min';
-
-  var fullJavascriptsPath = path.join('node_modules/ember-cli-bootstrap', javascriptsPath);
-  var jsFiles = fs.readdirSync(fullJavascriptsPath);
+  app.import(rootPath + 'css/bootstrap-theme.css');
+  app.import(rootPath + 'css/bootstrap.css');
+  
+    // Import fonts from bootstrap
+  app.import(rootPath + 'fonts/glyphicons-halflings-regular.woff');
+  app.import(rootPath + 'fonts/glyphicons-halflings-regular.eot');
+  app.import(rootPath + 'fonts/glyphicons-halflings-regular.svg');
+  app.import(rootPath + 'fonts/glyphicons-halflings-regular.ttf');
 
   // Import bootstrap_for_ember bs-core before other components
   app.import(javascriptsPath + 'bs-core' + envModifier + '.js');
