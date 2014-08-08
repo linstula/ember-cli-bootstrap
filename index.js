@@ -48,6 +48,12 @@ EmberCLIBootstrap.prototype.included = function included(app) {
       app.import(javascriptsPath + fileName + envModifier + '.js');
     }
   })
+
+  // Import fonts
+  app.import('vendor/bootstrap/dist/fonts/glyphicons-halflings-regular.eot', { destDir: 'fonts' });
+  app.import('vendor/bootstrap/dist/fonts/glyphicons-halflings-regular.svg', { destDir: 'fonts' });
+  app.import('vendor/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf', { destDir: 'fonts' });
+  app.import('vendor/bootstrap/dist/fonts/glyphicons-halflings-regular.woff', { destDir: 'fonts' });
 };
 
 module.exports = EmberCLIBootstrap;
