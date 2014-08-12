@@ -41,7 +41,6 @@ EmberCLIBootstrap.prototype.included = function included(app) {
   // Import css from bootstrap
   app.import(rootPath + 'css/bootstrap-theme.css');
   app.import(rootPath + 'css/bootstrap.css');
-  app.import(rootPath + 'css/bootstrap.css.map');
 
   // Import js from bootstrap
   app.import(rootPath + 'js/bootstrap.js');
@@ -65,8 +64,13 @@ EmberCLIBootstrap.prototype.postprocessTree = function(type, tree) {
       destDir: '/fonts',
       files: ['*.*']
     });
+    var maps = pickFiles(path.join(__dirname, 'vendor/bootstrap/dist/css'), {
+      srcDir: '/',
+      destDir: '/assets',
+      files: ['*.map']
+    });
 
-    tree = mergeTrees([tree, glyphicons]);
+    tree = mergeTrees([tree, glyphicons, maps]);
   }
 
   return tree;
