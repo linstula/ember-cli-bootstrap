@@ -18,5 +18,9 @@
     "type": "git",
     "url": "git://github.com/dockyard/ember-cli-bootstrap.git"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "broccoli-merge-trees": "^0.1.4",
+    "broccoli-static-compiler": "^0.1.4"
+  }
 }
