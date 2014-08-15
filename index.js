@@ -1,7 +1,9 @@
 'use strict';
 
-var path = require('path');
-var fs   = require('fs');
+var path       = require('path'),
+    fs         = require('fs'),
+    mergeTrees = require('broccoli-merge-trees'),
+    pickFiles  = require('broccoli-static-compiler');
 
 function EmberCLIBootstrap(project) {
   this.project = project;
@@ -24,19 +26,24 @@ EmberCLIBootstrap.prototype.treeFor = function treeFor(name) {
 };
 
 EmberCLIBootstrap.prototype.included = function included(app) {
-  var env = app.env;
-  var stylePath = 'vendor/bootstrap/dist/css/';
-  var javascriptsPath = 'vendor/ember-addons.bs_for_ember/dist/js/';
+  
+  var rootPath            = 'vendor/bootstrap/dist/',
+      javascriptsPath     = 'vendor/ember-addons.bs_for_ember/dist/js/',
+      env                 = app.env,
+      envModifier         = env !== 'production' ? '.max' : '.min', 
+      fullJavascriptsPath = path.join(
+                              'node_modules/ember-cli-bootstrap',
+                              javascriptsPath
+                            ),
+      jsFiles             = fs.readdirSync(fullJavascriptsPath);
 
+  
   // Import css from bootstrap
-  app.import(stylePath + 'bootstrap-theme.css');
-  app.import(stylePath + 'bootstrap.css');
+  app.import(rootPath + 'css/bootstrap-theme.css');
+  app.import(rootPath + 'css/bootstrap.css');
 
-  // set modifier for unminified or minified js files.
-  var envModifier = env !== 'production' ? '.max' : '.min';
-
-  var fullJavascriptsPath = path.join('node_modules/ember-cli-bootstrap', javascriptsPath);
-  var jsFiles = fs.readdirSync(fullJavascriptsPath);
+  // Import js from bootstrap
+  app.import(rootPath + 'js/bootstrap.js');
 
   // Import bootstrap_for_ember bs-core before other components
   app.import(javascriptsPath + 'bs-core' + envModifier + '.js');
@@ -48,6 +55,25 @@ EmberCLIBootstrap.prototype.included = function included(app) {
       app.import(javascriptsPath + fileName + envModifier + '.js');
     }
   })
+};
+
+EmberCLIBootstrap.prototype.postprocessTree = function(type, tree) {
+  if (type === 'all') {
+    var glyphicons = pickFiles(path.join(__dirname, 'vendor/bootstrap/fonts'), {
+      srcDir: '/',
+      destDir: '/fonts',
+      files: ['*.*']
+    });
+    var maps = pickFiles(path.join(__dirname, 'vendor/bootstrap/dist/css'), {
+      srcDir: '/',
+      destDir: '/assets',
+      files: ['*.map']
+    });
+
+    tree = mergeTrees([tree, glyphicons, maps]);
+  }
+
+  return tree;
 };
 
 module.exports = EmberCLIBootstrap;
