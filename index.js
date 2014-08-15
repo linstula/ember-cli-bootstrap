@@ -24,6 +24,11 @@ EmberCLIBootstrap.prototype.treeFor = function treeFor(name) {
 };
 
 EmberCLIBootstrap.prototype.included = function included(app) {
+  var emberCLIVersion = app.project.emberCLIVersion();
+  if (emberCLIVersion < '0.0.40') {
+    throw new Error('ember-cli-bootstrap requires version 0.0.40 or greater.\n');
+  }
+
   var env             = app.env;
   var stylePath       = 'vendor/bootstrap/dist/css/';
   var fontsPath       = 'vendor/bootstrap/dist/fonts/';
