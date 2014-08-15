@@ -24,30 +24,23 @@ EmberCLIBootstrap.prototype.treeFor = function treeFor(name) {
 };
 
 EmberCLIBootstrap.prototype.included = function included(app) {
-  var env = app.env;
-  var stylePath = 'vendor/bootstrap/dist/css/';
-  var javascriptsPath = 'vendor/ember-addons.bs_for_ember/dist/js/';
+  var env             = app.env;
+  var stylePath       = 'vendor/bootstrap/dist/css/';
+  var javascriptsPath = 'node_modules/ember-cli-bootstrap/vendor/ember-addons.bs_for_ember/dist/js/';
+  var envModifier     = env === 'production' ? '.min' : '.max';
+  var jsFiles         = fs.readdirSync(javascriptsPath);
 
   // Import css from bootstrap
   app.import(stylePath + 'bootstrap-theme.css');
   app.import(stylePath + 'bootstrap.css');
 
-  // set modifier for unminified or minified js files.
-  var envModifier = env !== 'production' ? '.max' : '.min';
+  // Import javascript files from bootstrap_for_ember
+  app.import('../../' + javascriptsPath + 'bs-core' + envModifier + '.js'); // Import bs-core first
 
-  var fullJavascriptsPath = path.join('node_modules/ember-cli-bootstrap', javascriptsPath);
-  var jsFiles = fs.readdirSync(fullJavascriptsPath);
-
-  // Import bootstrap_for_ember bs-core before other components
-  app.import(javascriptsPath + 'bs-core' + envModifier + '.js');
-
-  // Import remaining bootstrap_for_ember components
   jsFiles.forEach(function(file) {
     var fileName = file.split('.')[0];
-    if (fileName !== 'bs-core') {
-      app.import(javascriptsPath + fileName + envModifier + '.js');
-    }
-  })
+    app.import('../../' + javascriptsPath + fileName + envModifier + '.js');
+  });
 };
 
 module.exports = EmberCLIBootstrap;
