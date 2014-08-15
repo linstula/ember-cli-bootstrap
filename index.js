@@ -26,6 +26,7 @@ EmberCLIBootstrap.prototype.treeFor = function treeFor(name) {
 EmberCLIBootstrap.prototype.included = function included(app) {
   var env             = app.env;
   var stylePath       = 'vendor/bootstrap/dist/css/';
+  var fontsPath       = 'vendor/bootstrap/dist/fonts/';
   var javascriptsPath = 'node_modules/ember-cli-bootstrap/vendor/ember-addons.bs_for_ember/dist/js/';
   var envModifier     = env === 'production' ? '.min' : '.max';
   var jsFiles         = fs.readdirSync(javascriptsPath);
@@ -41,6 +42,12 @@ EmberCLIBootstrap.prototype.included = function included(app) {
     var fileName = file.split('.')[0];
     app.import('../../' + javascriptsPath + fileName + envModifier + '.js');
   });
+
+  // Import glyphicons
+  app.import(fontsPath + 'glyphicons-halflings-regular.eot', { destDir: '/fonts' });
+  app.import(fontsPath + 'glyphicons-halflings-regular.svg', { destDir: '/fonts' });
+  app.import(fontsPath + 'glyphicons-halflings-regular.ttf', { destDir: '/fonts' });
+  app.import(fontsPath + 'glyphicons-halflings-regular.woff', { destDir: '/fonts' });
 };
 
 module.exports = EmberCLIBootstrap;
