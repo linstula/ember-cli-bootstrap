@@ -26,19 +26,19 @@ EmberCLIBootstrap.prototype.treeFor = function treeFor(name) {
 EmberCLIBootstrap.prototype.included = function included(app) {
   var emberCLIVersion = app.project.emberCLIVersion();
   if (emberCLIVersion < '0.0.41') {
-    throw new Error('ember-cli-bootstrap requires version 0.0.41 or greater.\n');
+    throw new Error('ember-cli-bootstrap requires ember-cli version 0.0.41 or greater.\n');
   }
 
   var env             = app.env;
-  var stylePath       = 'vendor/bootstrap/dist/css/';
-  var fontsPath       = 'vendor/bootstrap/dist/fonts/';
+  var options         = app.options['ember-cli-bootstrap'];
+  var bootstrapPath   = 'vendor/bootstrap/dist/'
   var javascriptsPath = 'node_modules/ember-cli-bootstrap/vendor/ember-addons.bs_for_ember/dist/js/';
   var envModifier     = env === 'production' ? '.min' : '.max';
   var jsFiles         = fs.readdirSync(javascriptsPath);
 
   // Import css from bootstrap
-  app.import(stylePath + 'bootstrap-theme.css');
-  app.import(stylePath + 'bootstrap.css');
+  app.import(bootstrapPath + 'css/bootstrap-theme.css');
+  app.import(bootstrapPath + 'css/bootstrap.css');
 
   // Import javascript files from bootstrap_for_ember
   app.import('../../' + javascriptsPath + 'bs-core' + envModifier + '.js'); // Import bs-core first
@@ -48,11 +48,15 @@ EmberCLIBootstrap.prototype.included = function included(app) {
     app.import('../../' + javascriptsPath + fileName + envModifier + '.js');
   });
 
+  if (options.importBootstrapJS) {
+    app.import(bootstrapPath + 'js/bootstrap' + (env === 'production' ? '.min' : '')  + '.js');
+  }
+
   // Import glyphicons
-  app.import(fontsPath + 'glyphicons-halflings-regular.eot', { destDir: '/fonts' });
-  app.import(fontsPath + 'glyphicons-halflings-regular.svg', { destDir: '/fonts' });
-  app.import(fontsPath + 'glyphicons-halflings-regular.ttf', { destDir: '/fonts' });
-  app.import(fontsPath + 'glyphicons-halflings-regular.woff', { destDir: '/fonts' });
+  app.import(bootstrapPath + 'fonts/glyphicons-halflings-regular.eot', { destDir: '/fonts' });
+  app.import(bootstrapPath + 'fonts/glyphicons-halflings-regular.svg', { destDir: '/fonts' });
+  app.import(bootstrapPath + 'fonts/glyphicons-halflings-regular.ttf', { destDir: '/fonts' });
+  app.import(bootstrapPath + 'fonts/glyphicons-halflings-regular.woff', { destDir: '/fonts' });
 };
 
 module.exports = EmberCLIBootstrap;
