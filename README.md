@@ -28,7 +28,7 @@ accepts an array of component names:
 
 
 ```javascript
-#your-bootstrap-app/Brocfile.js
+//your-bootstrap-app/Brocfile.js
 
 /* global require, module */
 
@@ -56,7 +56,7 @@ javascript into your ember-cli project by setting the
 `importBootstrapJS` option to true in your `Brocfile.js`:
 
 ```javascript
-#your-bootstrap-app/Brocfile.js
+//your-bootstrap-app/Brocfile.js
 
 /* global require, module */
 
