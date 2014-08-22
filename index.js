@@ -29,11 +29,9 @@ EmberCLIBootstrap.prototype.included = function included(app) {
     throw new Error('ember-cli-bootstrap requires ember-cli version 0.0.41 or greater.\n');
   }
 
-  var env             = app.env;
   var options         = app.options['ember-cli-bootstrap'];
   var bootstrapPath   = 'vendor/bootstrap/dist/'
   var javascriptsPath = 'node_modules/ember-cli-bootstrap/vendor/ember-addons.bs_for_ember/dist/js/';
-  var envModifier     = env === 'production' ? '.min' : '.max';
   var jsFiles         = fs.readdirSync(javascriptsPath);
 
   // Import css from bootstrap
@@ -41,15 +39,15 @@ EmberCLIBootstrap.prototype.included = function included(app) {
   app.import(bootstrapPath + 'css/bootstrap.css');
 
   // Import javascript files from bootstrap_for_ember
-  app.import('../../' + javascriptsPath + 'bs-core' + envModifier + '.js'); // Import bs-core first
+  app.import('../../' + javascriptsPath + 'bs-core.max.js'); // Import bs-core first
 
   jsFiles.forEach(function(file) {
     var fileName = file.split('.')[0];
-    app.import('../../' + javascriptsPath + fileName + envModifier + '.js');
+    app.import('../../' + javascriptsPath + fileName + '.max.js');
   });
 
   if (options.importBootstrapJS) {
-    app.import(bootstrapPath + 'js/bootstrap' + (env === 'production' ? '.min' : '')  + '.js');
+    app.import(bootstrapPath + 'js/bootstrap'  + '.js');
   }
 
   // Import glyphicons
