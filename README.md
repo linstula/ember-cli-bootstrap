@@ -20,6 +20,29 @@ npm install --save-dev ember-cli-bootstrap
 You should now have access to bootstrap styles and the components
 provided by [bootstrap_for_ember](https://github.com/ember-addons/bootstrap-for-ember). Enjoy!
 
+##Importing specific bootstrap_for_ember components
+By default, all of the bootstrap_for_ember components will be imported
+into the project. You can optionally specify exactly which components
+should be imported into the project via the `component` option, which
+accepts an array of component names:
+
+
+```javascript
+#your-bootstrap-app/Brocfile.js
+
+/* global require, module */
+
+var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+
+var app = new EmberApp({
+  'ember-cli-bootstrap': {
+    'components': ['bs-alert', 'bs-notifications', 'bs-nav']
+  }
+});
+
+module.exports = app.toTree();
+```
+
 
 ## Importing javascript from Twitter Bootstrap
 The goal of this addon is to utilize the bootstrap_for_ember library to
@@ -32,8 +55,9 @@ bootstrap_for_ember, you can optionally import the Twitter Bootstrap
 javascript into your ember-cli project by setting the
 `importBootstrapJS` option to true in your `Brocfile.js`:
 
-`your-bootstrap-app/Brocfile.js`
 ```javascript
+#your-bootstrap-app/Brocfile.js
+
 /* global require, module */
 
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');

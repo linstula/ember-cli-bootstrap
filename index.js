@@ -32,13 +32,13 @@ EmberCLIBootstrap.prototype.included = function included(app) {
   var options         = app.options['ember-cli-bootstrap'];
   var bootstrapPath   = 'vendor/bootstrap/dist/'
   var javascriptsPath = 'node_modules/ember-cli-bootstrap/vendor/ember-addons.bs_for_ember/dist/js/';
-  var jsFiles         = fs.readdirSync(javascriptsPath);
+  var jsFiles         = options.components ? options.components : fs.readdirSync(javascriptsPath);
 
   // Import css from bootstrap
   app.import(bootstrapPath + 'css/bootstrap-theme.css');
   app.import(bootstrapPath + 'css/bootstrap.css');
 
-  // Import javascript files from bootstrap_for_ember
+  // Import javascript files
   app.import('../../' + javascriptsPath + 'bs-core.max.js'); // Import bs-core first
 
   jsFiles.forEach(function(file) {
