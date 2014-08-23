@@ -3,7 +3,7 @@ ember-cli-bootstrap
 
 ###Warning - this is still a WIP
 
-###ember-cli-bootstrap requires ember-cli version '0.0.41' or later
+###ember-cli-bootstrap requires ember-cli version '0.0.40' or later
 
 This is an ember-cli addon that includes styles from [Twitter Bootstrap](http://getbootstrap.com/) into your ember-cli project.
 
