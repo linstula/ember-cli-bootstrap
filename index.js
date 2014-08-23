@@ -25,11 +25,11 @@ EmberCLIBootstrap.prototype.treeFor = function treeFor(name) {
 
 EmberCLIBootstrap.prototype.included = function included(app) {
   var emberCLIVersion = app.project.emberCLIVersion();
-  if (emberCLIVersion < '0.0.41') {
-    throw new Error('ember-cli-bootstrap requires ember-cli version 0.0.41 or greater.\n');
+  if (emberCLIVersion < '0.0.40') {
+    throw new Error('ember-cli-bootstrap requires ember-cli version 0.0.40 or greater.\n');
   }
 
-  var options         = app.options['ember-cli-bootstrap'];
+  var options         = app.options['ember-cli-bootstrap'] || [];
   var bootstrapPath   = 'vendor/bootstrap/dist/'
   var javascriptsPath = 'node_modules/ember-cli-bootstrap/vendor/ember-addons.bs_for_ember/dist/js/';
   var jsFiles         = options.components ? options.components : fs.readdirSync(javascriptsPath);
