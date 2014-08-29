@@ -32,7 +32,7 @@ EmberCLIBootstrap.prototype.included = function included(app) {
   var options         = app.options['ember-cli-bootstrap'] || {};
   var bootstrapPath   = 'vendor/bootstrap/dist/'
   var javascriptsPath = 'node_modules/ember-cli-bootstrap/vendor/ember-addons.bs_for_ember/dist/js/';
-  var jsFiles         = (options.components) ? options.components : fs.readdirSync(javascriptsPath);
+  var jsFiles         = options.components ? options.components : fs.readdirSync(javascriptsPath);
 
   // Import css from bootstrap
   app.import(bootstrapPath + 'css/bootstrap-theme.css');
