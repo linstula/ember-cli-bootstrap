@@ -33,6 +33,9 @@ EmberCLIBootstrap.prototype.included = function included(app) {
   var bootstrapPath   = 'vendor/bootstrap/dist/'
   var javascriptsPath = 'node_modules/ember-cli-bootstrap/vendor/ember-addons.bs_for_ember/dist/js/';
   var jsFiles         = options.components ? options.components : fs.readdirSync(javascriptsPath);
+  
+  // Import css from bootstrap_for_ember (Growl Notifications)
+  app.import('vendor/ember-addons.bs_for_ember/dist/css/bs-growl-notifications.min.css');
 
   // Import css from bootstrap
   app.import(bootstrapPath + 'css/bootstrap-theme.css');
