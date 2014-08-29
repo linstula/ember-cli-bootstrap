@@ -30,27 +30,25 @@ EmberCLIBootstrap.prototype.included = function included(app) {
   }
 
   var options         = app.options['ember-cli-bootstrap'] || {};
-  var bootstrapPath   = 'vendor/bootstrap/dist/'
-  var javascriptsPath = 'node_modules/ember-cli-bootstrap/vendor/ember-addons.bs_for_ember/dist/js/';
-  var jsFiles         = options.components ? options.components : fs.readdirSync(javascriptsPath);
-  
-  // Import css from bootstrap_for_ember (Growl Notifications)
-  app.import('vendor/ember-addons.bs_for_ember/dist/css/bs-growl-notifications.min.css');
+  var bootstrapPath   = '../../node_modules/ember-cli-bootstrap/node_modules/bootstrap/dist/'
+  var javascriptsPath = '../../node_modules/ember-cli-bootstrap/vendor/ember-addons.bs_for_ember/dist/js/';
+  var jsFiles         = options.components ? options.components : fs.readdirSync('node_modules/ember-cli-bootstrap/vendor/ember-addons.bs_for_ember/dist/js/');
 
-  // Import css from bootstrap
+  // Import css
   app.import(bootstrapPath + 'css/bootstrap-theme.css');
   app.import(bootstrapPath + 'css/bootstrap.css');
+  app.import('vendor/ember-addons.bs_for_ember/dist/css/bs-growl-notifications.min.css');
 
   // Import javascript files
-  app.import('../../' + javascriptsPath + 'bs-core.max.js'); // Import bs-core first
+  app.import(javascriptsPath + 'bs-core.max.js'); // Import bs-core first
 
   jsFiles.forEach(function(file) {
     var fileName = file.split('.')[0];
-    app.import('../../' + javascriptsPath + fileName + '.max.js');
+    app.import(javascriptsPath + fileName + '.max.js');
   });
 
   if (options.importBootstrapJS) {
-    app.import(bootstrapPath + 'js/bootstrap'  + '.js');
+    app.import(bootstrapPath + 'js/bootstrap.js');
   }
 
   // Import glyphicons
