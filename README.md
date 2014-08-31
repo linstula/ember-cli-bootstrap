@@ -5,6 +5,10 @@ ember-cli-bootstrap
 
 ###ember-cli-bootstrap requires ember-cli version '0.0.41' or later
 
+###You will need to have bower installed globablly to use this addon.
+If you don't have bower installed, install it with:
+`npm install -g bower`
+
 This is an ember-cli addon that includes styles from [Twitter Bootstrap](http://getbootstrap.com/) into your ember-cli project.
 
 This addon utilizes the [bootstrap_for_ember](https://github.com/ember-addons/bootstrap-for-ember) library, which provides a collection of Ember components based on Twitter Bootstrap V3.
