@@ -5,8 +5,8 @@
   "author": "Lin Reid",
   "main": "index.js",
   "scripts": {
-    "prepublish": "mkdir -p vendor/ember-addons.bs_for_ember && cp -r bower_components/ember-addons.bs_for_ember/dist/ vendor/ember-addons.bs_for_ember/dist/",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "bower install"
   },
   "keywords": [
     "ember-addon",
@@ -18,8 +18,5 @@
     "type": "git",
     "url": "git://github.com/dockyard/ember-cli-bootstrap.git"
   },
-  "license": "MIT",
-  "dependencies": {
-    "bootstrap": "3.x"
-  }
+  "license": "MIT"
 }
