@@ -22,7 +22,7 @@ module.exports = {
     if (options.importBootstrapTheme) {
       app.import(path.join(bootstrapPath, 'css/bootstrap-theme.css'));
     }
-    if (!options.importBootstrapTheme === false) {
+    if (!options.importBootstrapCSS === false) {
       app.import(path.join(bootstrapPath, 'css/bootstrap.css'));
     }
     app.import(path.join(emberBsPath, 'css/bs-growl-notifications.min.css'));
