@@ -74,3 +74,27 @@ var app = new EmberApp({
 
 module.exports = app.toTree();
 ```
+
+
+## Excluding default Bootstrap theme
+
+By default, the distributed Bootstrap theme will be imported. If you
+import a custom theme this may cause problems. You can optionally
+*exclude* the default Twitter Bootstrap theme by setting the
+`excludeBootstrapTheme` option to true in your `Brocfile.js`:
+
+```javascript
+//your-bootstrap-app/Brocfile.js
+
+/* global require, module */
+
+var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+
+var app = new EmberApp({
+  'ember-cli-bootstrap': {
+    'excludeBootstrapTheme': true
+  }
+});
+
+module.exports = app.toTree();
+```
