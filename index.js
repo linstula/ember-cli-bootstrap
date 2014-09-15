@@ -18,8 +18,12 @@ module.exports = {
     var javascriptsPath = path.join(emberBsPath, 'js');
     var jsFiles         = options.components ? options.components : fs.readdirSync(path.join(modulePath, javascriptsPath));
 
+    // Optionally import default bootstrap theme
+    if (!options.excludeBootstrapTheme) {
+      app.import(path.join(bootstrapPath, 'css/bootstrap-theme.css'));
+    }
+
     // Import css from bootstrap
-    app.import(path.join(bootstrapPath, 'css/bootstrap-theme.css'));
     app.import(path.join(bootstrapPath, 'css/bootstrap.css'));
     app.import(path.join(emberBsPath, 'css/bs-growl-notifications.min.css'));
 
