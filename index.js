@@ -25,6 +25,7 @@ module.exports = {
     if (options.importBootstrapCSS !== false) {
       app.import(path.join(bootstrapPath, 'css/bootstrap.css'));
     }
+    app.import(path.join(bootstrapPath, 'css/bootstrap.css.map'), { destDir: 'assets' });
     app.import(path.join(emberBsPath, 'css/bs-growl-notifications.min.css'));
 
     // Import javascript files
