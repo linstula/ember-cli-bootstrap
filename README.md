@@ -74,3 +74,42 @@ var app = new EmberApp({
 
 module.exports = app.toTree();
 ```
+
+## Importing Twitter Bootstrap Theme
+Bootstrap comes with an optional theme CSS with various visual enhancements.  To include this file you can import it by setting `importBootstrapTheme` to true in your `Brocfile.js`:
+
+```javascript
+//your-bootstrap-app/Brocfile.js
+
+/* global require, module */
+
+var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+
+var app = new EmberApp({
+  'ember-cli-bootstrap': {
+    'importBootstrapTheme': true
+  }
+});
+
+module.exports = app.toTree();
+```
+
+## Opting out of Bootstrap CSS
+In situations where you prefer to use another strategy for importing Bootstrap CSS,
+you can opt out of CSS import by setting the `importBootstrapCSS` option to false in your `Brocfile.js`:
+
+```javascript
+//your-bootstrap-app/Brocfile.js
+
+/* global require, module */
+
+var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+
+var app = new EmberApp({
+  'ember-cli-bootstrap': {
+    'importBootstrapCSS': false
+  }
+});
+
+module.exports = app.toTree();
+```
