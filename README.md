@@ -113,3 +113,23 @@ var app = new EmberApp({
 
 module.exports = app.toTree();
 ```
+
+## Opting out of Bootstrap Font
+In situations where you prefer to use another strategy for importing the Bootstrap font,
+you can opt out of the font import by setting the `importBootstrapFont` option to false in your `Brocfile.js`:
+
+```javascript
+//your-bootstrap-app/Brocfile.js
+
+/* global require, module */
+
+var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+
+var app = new EmberApp({
+  'ember-cli-bootstrap': {
+    'importBootstrapFont': false
+  }
+});
+
+module.exports = app.toTree();
+```
