@@ -21,6 +21,11 @@ In the root of your ember-cli project directory, run:
 npm install --save-dev ember-cli-bootstrap
 ```
 
+To prevent JSHint errors, you can import `Bootstrap` as a module with:
+```javascript
+import Bootstrap from 'bootstrap';
+```
+
 You should now have access to bootstrap styles and the components
 provided by [bootstrap_for_ember](https://github.com/ember-addons/bootstrap-for-ember). Enjoy!
 

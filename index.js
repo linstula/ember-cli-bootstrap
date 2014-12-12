@@ -22,12 +22,12 @@ module.exports = {
     if (options.importBootstrapTheme) {
       app.import(path.join(bootstrapPath, 'css/bootstrap-theme.css'));
     }
+
     if (options.importBootstrapCSS !== false) {
       app.import(path.join(bootstrapPath, 'css/bootstrap.css'));
       app.import(path.join(bootstrapPath, 'css/bootstrap.css.map'), { destDir: 'assets' });
+      app.import(path.join(emberBsPath, 'css/bs-growl-notifications.min.css'));
     }
-    
-    app.import(path.join(emberBsPath, 'css/bs-growl-notifications.min.css'));
 
     // Import javascript files
     app.import(path.join(javascriptsPath, 'bs-core.max.js')); // Import bs-core first
@@ -48,5 +48,11 @@ module.exports = {
       app.import(path.join(bootstrapPath, 'fonts/glyphicons-halflings-regular.ttf'), { destDir: '/fonts' });
       app.import(path.join(bootstrapPath, 'fonts/glyphicons-halflings-regular.woff'), { destDir: '/fonts' });
     }
+
+    // import bootstrap module
+    app.import(path.join('vendor/ember-cli-bootstrap/shim.js'), {
+      type: 'vendor',
+      exports: { 'bootstrap': ['default'] }
+    });
   }
 };
