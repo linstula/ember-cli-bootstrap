@@ -18,6 +18,15 @@ module.exports = {
     var javascriptsPath = path.join(emberBsPath, 'js');
     var jsFiles         = options.components ? options.components : fs.readdirSync(path.join(modulePath, javascriptsPath));
 
+    // remove underscore from bs-popover component's template name
+    if (jsFiles.indexOf('bs-popover') > -1 || jsFiles.indexOf('bs-popover.max.js') > -1 ) {
+      var popoverPath = path.join(__dirname ,'vendor/ember-addons.bs_for_ember/dist/js/bs-popover.max.js');
+      var data = fs.readFileSync(popoverPath, { 'encoding': 'utf8' });
+      var modifiedFile = data.replace(/\/_partial-content-/g, '/partial-content-');
+
+      fs.writeFileSync(popoverPath, modifiedFile, { 'encoding': 'utf8' });
+    }
+
     // Import css from bootstrap
     if (options.importBootstrapTheme) {
       app.import(path.join(bootstrapPath, 'css/bootstrap-theme.css'));
