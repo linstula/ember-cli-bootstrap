@@ -1,7 +1,0 @@
-{
-  "name": "ember-cli-bootstrap",
-  "dependencies": {
-    "bootstrap": "~3.3",
-    "ember-addons.bs_for_ember": "~0.7.0"
-  }
-}

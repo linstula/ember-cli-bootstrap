@@ -4,7 +4,7 @@ var path = require('path');
 module.exports = {
   name: 'ember-cli-bootstrap',
   included: function included(app) {
-    this.app = app;
+    this._super.included(app);
 
     var emberCLIVersion = app.project.emberCLIVersion();
     if (emberCLIVersion < '0.0.41') {
@@ -12,15 +12,14 @@ module.exports = {
     }
 
     var options         = app.options['ember-cli-bootstrap'] || {};
-    var modulePath      = path.relative(app.project.root, __dirname);
-    var bootstrapPath   = 'vendor/bootstrap/dist/';
-    var emberBsPath     = 'vendor/ember-addons.bs_for_ember/dist'
-    var javascriptsPath = path.join(emberBsPath, 'js');
-    var jsFiles         = options.components ? options.components : fs.readdirSync(path.join(modulePath, javascriptsPath));
+    var bootstrapPath   = app.bowerDirectory + '/bootstrap/dist';
+    var emberBsPath     = app.bowerDirectory + '/ember-addons.bs_for_ember/dist';
+    var javascriptsPath = path.join(emberBsPath, 'js/');
+    var jsFiles         = options.components ? options.components : fs.readdirSync(path.join(javascriptsPath));
 
     // remove underscore from bs-popover component's template name
     if (jsFiles.indexOf('bs-popover') > -1 || jsFiles.indexOf('bs-popover.max.js') > -1 ) {
-      var popoverPath = path.join(__dirname ,'vendor/ember-addons.bs_for_ember/dist/js/bs-popover.max.js');
+      var popoverPath = path.join(javascriptsPath, 'bs-popover.max.js');
       var data = fs.readFileSync(popoverPath, { 'encoding': 'utf8' });
       var modifiedFile = data.replace(/\/_partial-content-/g, '/partial-content-');
 
@@ -32,7 +31,7 @@ module.exports = {
       app.import(path.join(bootstrapPath, 'css/bootstrap-theme.css'));
     }
 
-    if (options.importBootstrapCSS !== false) {
+    if (!options.importBootstrapCSS) {
       app.import(path.join(bootstrapPath, 'css/bootstrap.css'));
       app.import(path.join(bootstrapPath, 'css/bootstrap.css.map'), { destDir: 'assets' });
       app.import(path.join(emberBsPath, 'css/bs-growl-notifications.min.css'));
@@ -51,7 +50,7 @@ module.exports = {
     }
 
     // Import glyphicons
-    if (options.importBootstrapFont !== false) {
+    if (!options.importBootstrapFont) {
       app.import(path.join(bootstrapPath, 'fonts/glyphicons-halflings-regular.eot'), { destDir: '/fonts' });
       app.import(path.join(bootstrapPath, 'fonts/glyphicons-halflings-regular.svg'), { destDir: '/fonts' });
       app.import(path.join(bootstrapPath, 'fonts/glyphicons-halflings-regular.ttf'), { destDir: '/fonts' });
