@@ -15,10 +15,17 @@ module.exports = {
     var bootstrapPath   = app.bowerDirectory + '/bootstrap/dist';
     var emberBsPath     = app.bowerDirectory + '/ember-addons.bs_for_ember/dist';
     var javascriptsPath = path.join(emberBsPath, 'js/');
-    var jsFiles         = options.components ? options.components : fs.readdirSync(path.join(javascriptsPath));
+
+    // Component names from options, or list of all available components
+    var jsFiles = options.components || fs.readdirSync(javascriptsPath).filter(function(fileName){
+      var fileParts = fileName.split('.');
+      return fileParts[0] != 'bs-core' && fileParts[1] == 'max'; // Limit to just one component file
+    }).map(function(fileName){
+      return fileName.split('.')[0]; // Remove the filename extensions
+    });
 
     // remove underscore from bs-popover component's template name
-    if (jsFiles.indexOf('bs-popover') > -1 || jsFiles.indexOf('bs-popover.max.js') > -1 ) {
+    if (jsFiles.indexOf('bs-popover') > -1) {
       var popoverPath = path.join(javascriptsPath, 'bs-popover.max.js');
       var data = fs.readFileSync(popoverPath, { 'encoding': 'utf8' });
       var modifiedFile = data.replace(/\/_partial-content-/g, '/partial-content-');
@@ -56,8 +63,7 @@ module.exports = {
       production: path.join(javascriptsPath, 'bs-core.min.js')
     }); // Import bs-core first
 
-    jsFiles.forEach(function(file) {
-      var fileName = file.split('.')[0];
+    jsFiles.forEach(function(fileName) {
       app.import({
         development: path.join(javascriptsPath, fileName + '.max.js'),
         production: path.join(javascriptsPath, fileName + '.min.js')
