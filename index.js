@@ -31,7 +31,10 @@ module.exports = {
         development: path.join(bootstrapPath, 'css/bootstrap.css'),
         production: path.join(bootstrapPath, 'css/bootstrap.min.css')
       });
-      app.import(path.join(bootstrapPath, 'css/bootstrap.css.map'), { destDir: 'assets' });
+      app.import({
+        development: path.join(bootstrapPath, 'css/bootstrap.css.map'),
+        production: false
+      }, { destDir: 'assets' });
       app.import(path.join(emberBsPath, 'css/bs-growl-notifications.min.css'));
     }
 
@@ -41,7 +44,10 @@ module.exports = {
         development: path.join(bootstrapPath, 'css/bootstrap-theme.css'),
         production: path.join(bootstrapPath, 'css/bootstrap-theme.min.css')
       });
-      app.import(path.join(bootstrapPath, 'css/bootstrap-theme.css.map'), { destDir: 'assets' });
+      app.import({
+        development: path.join(bootstrapPath, 'css/bootstrap-theme.css.map'),
+        production: false
+      }, { destDir: 'assets' });
     }
 
     // Import javascript files
