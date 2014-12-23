@@ -28,25 +28,40 @@ module.exports = {
 
     // Import css from bootstrap
     if (options.importBootstrapTheme) {
-      app.import(path.join(bootstrapPath, 'css/bootstrap-theme.css'));
+      app.import({
+        development: path.join(bootstrapPath, 'css/bootstrap-theme.css'),
+        production: path.join(bootstrapPath, 'css/bootstrap-theme.min.css')
+      });
     }
 
     if (options.importBootstrapCSS !== false) {
-      app.import(path.join(bootstrapPath, 'css/bootstrap.css'));
+      app.import({
+        development: path.join(bootstrapPath, 'css/bootstrap.css'),
+        production: path.join(bootstrapPath, 'css/bootstrap.min.css')
+      });
       app.import(path.join(bootstrapPath, 'css/bootstrap.css.map'), { destDir: 'assets' });
       app.import(path.join(emberBsPath, 'css/bs-growl-notifications.min.css'));
     }
 
     // Import javascript files
-    app.import(path.join(javascriptsPath, 'bs-core.max.js')); // Import bs-core first
+    app.import({
+      development: path.join(javascriptsPath, 'bs-core.max.js'),
+      production: path.join(javascriptsPath, 'bs-core.min.js')
+    }); // Import bs-core first
 
     jsFiles.forEach(function(file) {
       var fileName = file.split('.')[0];
-      app.import(path.join(javascriptsPath, fileName + '.max.js'));
+      app.import({
+        development: path.join(javascriptsPath, fileName + '.max.js'),
+        production: path.join(javascriptsPath, fileName + '.min.js')
+      });
     });
 
     if (options.importBootstrapJS) {
-      app.import(path.join(bootstrapPath, 'js/bootstrap.js'));
+      app.import({
+        development: path.join(bootstrapPath, 'js/bootstrap.js'),
+        production: path.join(bootstrapPath, 'js/bootstrap.min.js')
+      });
     }
 
     // Import glyphicons
