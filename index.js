@@ -56,11 +56,5 @@ module.exports = {
       app.import(path.join(bootstrapPath, 'fonts/glyphicons-halflings-regular.ttf'), { destDir: '/fonts' });
       app.import(path.join(bootstrapPath, 'fonts/glyphicons-halflings-regular.woff'), { destDir: '/fonts' });
     }
-
-    // import bootstrap module
-    app.import(path.join('vendor/ember-cli-bootstrap/shim.js'), {
-      type: 'vendor',
-      exports: { 'bootstrap': ['default'] }
-    });
   }
 };
