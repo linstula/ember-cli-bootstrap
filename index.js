@@ -26,14 +26,6 @@ module.exports = {
       fs.writeFileSync(popoverPath, modifiedFile, { 'encoding': 'utf8' });
     }
 
-    // Import css from bootstrap
-    if (options.importBootstrapTheme) {
-      app.import({
-        development: path.join(bootstrapPath, 'css/bootstrap-theme.css'),
-        production: path.join(bootstrapPath, 'css/bootstrap-theme.min.css')
-      });
-    }
-
     if (options.importBootstrapCSS !== false) {
       app.import({
         development: path.join(bootstrapPath, 'css/bootstrap.css'),
@@ -41,6 +33,15 @@ module.exports = {
       });
       app.import(path.join(bootstrapPath, 'css/bootstrap.css.map'), { destDir: 'assets' });
       app.import(path.join(emberBsPath, 'css/bs-growl-notifications.min.css'));
+    }
+
+    // Import css from bootstrap
+    if (options.importBootstrapTheme) {
+      app.import({
+        development: path.join(bootstrapPath, 'css/bootstrap-theme.css'),
+        production: path.join(bootstrapPath, 'css/bootstrap-theme.min.css')
+      });
+      app.import(path.join(bootstrapPath, 'css/bootstrap-theme.css.map'), { destDir: 'assets' });
     }
 
     // Import javascript files
