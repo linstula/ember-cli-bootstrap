@@ -15,10 +15,17 @@ module.exports = {
     var bootstrapPath   = app.bowerDirectory + '/bootstrap/dist';
     var emberBsPath     = app.bowerDirectory + '/ember-addons.bs_for_ember/dist';
     var javascriptsPath = path.join(emberBsPath, 'js/');
-    var jsFiles         = options.components ? options.components : fs.readdirSync(path.join(javascriptsPath));
+
+    // Component names from options, or list of all available components
+    var jsFiles = options.components || fs.readdirSync(javascriptsPath).filter(function(fileName){
+      var fileParts = fileName.split('.');
+      return fileParts[0] != 'bs-core' && fileParts[1] == 'max'; // Limit to just one component file
+    }).map(function(fileName){
+      return fileName.split('.')[0]; // Remove the filename extensions
+    });
 
     // remove underscore from bs-popover component's template name
-    if (jsFiles.indexOf('bs-popover') > -1 || jsFiles.indexOf('bs-popover.max.js') > -1 ) {
+    if (jsFiles.indexOf('bs-popover') > -1) {
       var popoverPath = path.join(javascriptsPath, 'bs-popover.max.js');
       var data = fs.readFileSync(popoverPath, { 'encoding': 'utf8' });
       var modifiedFile = data.replace(/\/_partial-content-/g, '/partial-content-');
@@ -26,41 +33,56 @@ module.exports = {
       fs.writeFileSync(popoverPath, modifiedFile, { 'encoding': 'utf8' });
     }
 
-    // Import css from bootstrap
-    if (options.importBootstrapTheme) {
-      app.import(path.join(bootstrapPath, 'css/bootstrap-theme.css'));
-    }
-
-    if (!options.importBootstrapCSS) {
-      app.import(path.join(bootstrapPath, 'css/bootstrap.css'));
-      app.import(path.join(bootstrapPath, 'css/bootstrap.css.map'), { destDir: 'assets' });
+    if (options.importBootstrapCSS !== false) {
+      app.import({
+        development: path.join(bootstrapPath, 'css/bootstrap.css'),
+        production: path.join(bootstrapPath, 'css/bootstrap.min.css')
+      });
+      app.import({
+        development: path.join(bootstrapPath, 'css/bootstrap.css.map'),
+        production: false
+      }, { destDir: 'assets' });
       app.import(path.join(emberBsPath, 'css/bs-growl-notifications.min.css'));
     }
 
-    // Import javascript files
-    app.import(path.join(javascriptsPath, 'bs-core.max.js')); // Import bs-core first
+    // Import css from bootstrap
+    if (options.importBootstrapTheme) {
+      app.import({
+        development: path.join(bootstrapPath, 'css/bootstrap-theme.css'),
+        production: path.join(bootstrapPath, 'css/bootstrap-theme.min.css')
+      });
+      app.import({
+        development: path.join(bootstrapPath, 'css/bootstrap-theme.css.map'),
+        production: false
+      }, { destDir: 'assets' });
+    }
 
-    jsFiles.forEach(function(file) {
-      var fileName = file.split('.')[0];
-      app.import(path.join(javascriptsPath, fileName + '.max.js'));
+    // Import javascript files
+    app.import({
+      development: path.join(javascriptsPath, 'bs-core.max.js'),
+      production: path.join(javascriptsPath, 'bs-core.min.js')
+    }); // Import bs-core first
+
+    jsFiles.forEach(function(fileName) {
+      app.import({
+        development: path.join(javascriptsPath, fileName + '.max.js'),
+        production: path.join(javascriptsPath, fileName + '.min.js')
+      });
     });
 
     if (options.importBootstrapJS) {
-      app.import(path.join(bootstrapPath, 'js/bootstrap.js'));
+      app.import({
+        development: path.join(bootstrapPath, 'js/bootstrap.js'),
+        production: path.join(bootstrapPath, 'js/bootstrap.min.js')
+      });
     }
 
     // Import glyphicons
-    if (!options.importBootstrapFont) {
+    if (options.importBootstrapFont !== false) {
       app.import(path.join(bootstrapPath, 'fonts/glyphicons-halflings-regular.eot'), { destDir: '/fonts' });
       app.import(path.join(bootstrapPath, 'fonts/glyphicons-halflings-regular.svg'), { destDir: '/fonts' });
       app.import(path.join(bootstrapPath, 'fonts/glyphicons-halflings-regular.ttf'), { destDir: '/fonts' });
       app.import(path.join(bootstrapPath, 'fonts/glyphicons-halflings-regular.woff'), { destDir: '/fonts' });
     }
-
-    // import bootstrap module
-    app.import(path.join('vendor/ember-cli-bootstrap/shim.js'), {
-      type: 'vendor',
-      exports: { 'bootstrap': ['default'] }
-    });
   }
 };
