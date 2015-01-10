@@ -31,7 +31,7 @@ module.exports = {
       app.import(path.join(bootstrapPath, 'css/bootstrap-theme.css'));
     }
 
-    if (!options.importBootstrapCSS) {
+    if (options.importBootstrapCSS !== false) {
       app.import(path.join(bootstrapPath, 'css/bootstrap.css'));
       app.import(path.join(bootstrapPath, 'css/bootstrap.css.map'), { destDir: 'assets' });
       app.import(path.join(emberBsPath, 'css/bs-growl-notifications.min.css'));
@@ -50,7 +50,7 @@ module.exports = {
     }
 
     // Import glyphicons
-    if (!options.importBootstrapFont) {
+    if (options.importBootstrapFont !== false) {
       app.import(path.join(bootstrapPath, 'fonts/glyphicons-halflings-regular.eot'), { destDir: '/fonts' });
       app.import(path.join(bootstrapPath, 'fonts/glyphicons-halflings-regular.svg'), { destDir: '/fonts' });
       app.import(path.join(bootstrapPath, 'fonts/glyphicons-halflings-regular.ttf'), { destDir: '/fonts' });
