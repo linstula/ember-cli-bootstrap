@@ -27,7 +27,7 @@ module.exports = {
     }
 
     // Import Ember Template Compiler
-    app.import(path.join(app.bowerDirectory, 'ember', 'ember-template-compiler'));
+    app.import(path.join(app.bowerDirectory, 'ember', 'ember-template-compiler.js'));
 
     // Import css from bootstrap
     if (options.importBootstrapTheme) {
