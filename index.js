@@ -26,6 +26,9 @@ module.exports = {
       fs.writeFileSync(popoverPath, modifiedFile, { 'encoding': 'utf8' });
     }
 
+    // Import Ember Template Compiler
+    app.import(path.join(app.bowerDirectory, 'ember', 'ember-template-compiler.js'));
+
     // Import css from bootstrap
     if (options.importBootstrapTheme) {
       app.import(path.join(bootstrapPath, 'css/bootstrap-theme.css'));
