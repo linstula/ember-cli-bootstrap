@@ -1,7 +1,7 @@
 ember-cli-bootstrap
 ===================
 
-###Warning - this is still a WIP
+###This project is depricated because the [bootstrap_for_ember](https://github.com/ember-addons/bootstrap-for-ember) project is no longer being supported.
 
 ###ember-cli-bootstrap requires ember-cli version '0.0.41' or later
 
