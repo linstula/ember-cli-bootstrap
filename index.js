@@ -58,7 +58,7 @@ module.exports = {
     }
 
     // import bootstrap module
-    app.import(path.join('vendor/ember-cli-bootstrap/shim.js'), {
+    app.import(path.join('bower_components/ember-cli-shims/app-shims.js'), {
       type: 'vendor',
       exports: { 'bootstrap': ['default'] }
     });
