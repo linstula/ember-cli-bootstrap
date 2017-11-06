@@ -1,16 +1,18 @@
 ember-cli-bootstrap
 ===================
 
-###This project is depricated because the [bootstrap_for_ember](https://github.com/ember-addons/bootstrap-for-ember) project is no longer being supported.
+## This project is depricated because the [bootstrap_for_ember](https://github.com/ember-addons/bootstrap-for-ember) project is no longer being supported.
 
-###ember-cli-bootstrap requires ember-cli version '0.0.41' or later
+You may want to look at [**ember-bootstrap**](https://github.com/kaliber5/ember-bootstrap), which is actively maintained!
+
+### ember-cli-bootstrap requires ember-cli version '0.0.41' or later
 
 This is an ember-cli addon that includes styles from [Twitter Bootstrap](http://getbootstrap.com/) into your ember-cli project.
 
 This addon utilizes the [bootstrap_for_ember](https://github.com/ember-addons/bootstrap-for-ember) library, which provides a collection of Ember components based on Twitter Bootstrap V3.
 You can find documentation for usage [here](https://github.com/ember-addons/bootstrap-for-ember).
 
-#Usage
+# Usage
 
 In the root of your ember-cli project directory, run:
 ```bash
